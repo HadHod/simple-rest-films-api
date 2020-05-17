@@ -1,0 +1,29 @@
+{
+    "name": "virtual-3d-projects-server",
+    "version": "1.0.0",
+    "description": "virtual 3d projects - server",
+    "main": "dist/index.js",
+    "author": "Maciej Młynarski <maciej.mlynarski@gmail.com>",
+    "license": "ISC",
+    "private": true,
+    "scripts": {
+        "build": "tsc -p tsconfig.json",
+        "dev": "nodemon -e ts --watch src --exec 'ts-node src/index.ts'",
+        "lint": "tslint -p tsconfig.json --format stylish",
+        "start": "node dist/index.js"
+    },
+    "devDependencies": {
+        "nodemon": "^2.0.1",
+        "ts-node": "^7.0.0",
+        "tslint": "^5.10.0",
+        "typescript": "^2.9.2"
+    },
+    "dependencies": {
+        "@types/express": "^4.17.2",
+        "@types/node": "^10.3.6",
+        "express": "^4.17.1",
+        "pg": "^7.14.0",
+        "pg-hstore": "^2.3.3",
+        "sequelize": "^5.21.3"
+    }
+}
