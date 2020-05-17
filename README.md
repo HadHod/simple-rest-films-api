@@ -4,5 +4,5 @@ REST films API on NodeJS, Express, TypeScript
 
 ### Running
 
-npm run build
-npm run start
+* npm run build
+* npm run start
