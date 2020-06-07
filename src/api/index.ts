@@ -1,5 +1,5 @@
 import express, { Router, Response, Request } from 'express';
-import films from '../db/films';
+import { getFilms } from '../db/films';
 
 const router: Router = express.Router();
 
@@ -11,7 +11,7 @@ const router: Router = express.Router();
  * @apiSuccess {Film[]} list of objects of the Film.
  */
 router.get('/films', (_req: Request, res: Response) => {
-    res.json(films);
+    res.json(getFilms());
 });
 
 /**
@@ -24,7 +24,7 @@ router.get('/films', (_req: Request, res: Response) => {
  * @apiSuccess {Film} objects of the Film.
  */
 router.get('/films/:id', (req: Request, res: Response) => {
-    const film = films.find(f => f.id === req.params.id);
+    const film = getFilms().find(f => f.id === req.params.id);
     if (film) {
         res.json(film);
     } else {

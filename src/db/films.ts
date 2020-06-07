@@ -1,25 +1,68 @@
-import { IFilm } from '../models/IFilm';
-import { GENRE } from '../enums/Genre';
+const dummyjson  = require('dummy-json');
 
-const films: IFilm[] = [
-    {
-        id: '0',
-        name: 'Star Wars: Episode IX - The Rise of Skywalker',
-        premiere: 2019,
-        rating: 7,
-        director: 'J.J. Abrams',
-        cast: ['Carrie Fisher', 'Mark Hamill', 'Adam Driver'],
-        genres: [GENRE.ACTION, GENRE.ADVENTURE, GENRE.FANTASY, GENRE.SCI_FI]
-    },
-    {
-        id: '1',
-        name: 'Parasite',
-        premiere: 2019,
-        rating: 9,
-        director: 'Bong Joon Ho',
-        cast: ['Kang-ho Song', 'Sun-kyun Lee', 'Yeo-jeong Jo'],
-        genres: [GENRE.COMEDY, GENRE.DRAMA, GENRE.THRILLER]
+import { IFilm } from '../models/IFilm';
+
+let films: IFilm[] = [];
+
+const template = `
+{
+    "films": [
+      {{#repeat 100}}
+      {
+        "id": {{@index}},
+        "title": "{{company}}",
+        "rating": "{{int 1 10}}",
+        "description": "{{lorem 150}}",
+        "duration": "{{int 60 200}}",
+        "premiere": "{{int 1950 2020}}",
+        "image": "img{{@index}}.png",
+        "genres": [
+          {{#repeat 5}}
+          "{{genre}}"
+          {{/repeat}}
+        ]
+      }
+      {{/repeat}}
+    ]
+}
+`;
+
+const helpers = {
+    genre: () => {
+        const genres = [
+            'Action',
+            'Adventure',
+            'Animation',
+            'Biography',
+            'Comedy',
+            'Crime',
+            'Documentary',
+            'Drama',
+            'Family',
+            'Fantasy',
+            'Film Noir',
+            'History',
+            'Horror',
+            'Music',
+            'Musical',
+            'Mystery',
+            'Romance',
+            'Sci-Fi',
+            'Short Film',
+            'Sport',
+            'Superhero',
+            'Thriller',
+            'War',
+            'Western'
+        ];
+        return genres[Math.floor(Math.random() * genres.length)];
     }
-];
+};
+
+export const generateDB = () => {
+    films = JSON.parse(dummyjson.parse(template, { helpers })).films;
+};
+
+export const getFilms = () => films;
 
 export default films;
